@@ -1,0 +1,31 @@
+{
+    "name": "phpbbseo/bbcodeperms",
+    "type": "phpbb-extension",
+    "description": "Hide selected BBCodes from specific user groups with customizable access denied message",
+    "homepage": "https://www.phpbbseo.com",
+    "version": "1.0.0",
+    "time": "2026-09-29",
+    "license": "GPL-2.0-only",
+    "authors": [
+        {
+            "name": "Meis@M",
+            "email": "info@phpbb-seo.ir",
+            "homepage": "https://www.phpbbseo.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.2.0",
+        "composer/installers": "~1.0"
+    },
+    "support": {
+        "source": "https://github.com/phpbb-seo/phpbb-ext-bbcodeperms",
+        "issues": "https://github.com/phpbb-seo/phpbb-ext-bbcodeperms/issues"
+    },
+    "extra": {
+        "display-name": "phpBB SEO BBCode Permissions",
+        "soft-require": {
+            "phpbb/phpbb": ">=3.3.0,<4.0.0@dev"
+        }
+    }
+}

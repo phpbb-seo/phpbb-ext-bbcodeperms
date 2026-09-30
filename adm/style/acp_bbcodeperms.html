@@ -1,0 +1,624 @@
+<!-- INCLUDE overall_header.html -->
+
+<style>
+/* Modern BBCode Permissions ACP Styling */
+.bbcodeperms-panel {
+	max-width: 650px;
+	background: #ffffff;
+	border: 1px solid #dcdfe4;
+	border-radius: 8px;
+	padding: 12px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+	margin-top: 5px;
+}
+.bbcodeperms-toolbar {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 10px;
+	flex-wrap: wrap;
+}
+.bbcodeperms-search {
+	flex-grow: 1;
+	min-width: 180px;
+	padding: 6px 12px !important;
+	border: 1px solid #c4c9d0 !important;
+	border-radius: 4px !important;
+	font-size: 13px !important;
+	box-sizing: border-box;
+}
+.bbcodeperms-badge {
+	display: inline-block;
+	background: #e0f2fe;
+	color: #0369a1;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 3px 10px;
+	border-radius: 12px;
+	border: 1px solid #bae6fd;
+}
+.bbcodeperms-scrollbox {
+	max-height: 220px;
+	overflow-y: auto;
+	border: 1px solid #e2e8f0;
+	border-radius: 6px;
+	background: #f8fafc;
+	padding: 6px;
+}
+.bbcodeperms-section-hdr {
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #475569;
+	background: #e2e8f0;
+	padding: 5px 10px;
+	border-radius: 4px;
+	margin: 6px 0 4px 0;
+}
+.bbcodeperms-row {
+	display: flex;
+	align-items: center;
+	padding: 7px 10px;
+	background: #ffffff;
+	border: 1px solid #f1f5f9;
+	border-radius: 5px;
+	margin-bottom: 4px;
+	cursor: pointer;
+	user-select: none;
+	transition: all 0.15s ease;
+}
+.bbcodeperms-row:hover {
+	background: #f0f7ff;
+	border-color: #cbd5e1;
+}
+.bbcodeperms-row input[type="checkbox"] {
+	margin: 0 8px 0 0 !important;
+	cursor: pointer;
+	flex-shrink: 0;
+	width: 16px;
+	height: 16px;
+}
+.bbcodeperms-tag-badge {
+	font-family: monospace;
+	font-weight: 700;
+	font-size: 12px;
+	background: #e0e7ff;
+	color: #3730a3;
+	padding: 2px 7px;
+	border-radius: 4px;
+	margin-right: 8px;
+}
+.bbcodeperms-row-desc {
+	font-size: 12px;
+	color: #64748b;
+}
+.bbcodeperms-sys-badge {
+	font-size: 10px;
+	background: #f1f5f9;
+	color: #475569;
+	padding: 2px 6px;
+	border-radius: 3px;
+	margin-left: 6px;
+	border: 1px solid #cbd5e1;
+}
+
+/* Quick Insert Bar */
+.bbcodeperms-quick-bar {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-bottom: 8px;
+	max-width: 650px;
+}
+.bbcodeperms-quick-title {
+	font-size: 11px;
+	font-weight: 700;
+	color: #475569;
+	text-transform: uppercase;
+}
+.bbcodeperms-chip-btn {
+	background: #f1f5f9;
+	border: 1px solid #cbd5e1;
+	border-radius: 4px;
+	padding: 3px 8px;
+	font-size: 11px;
+	font-family: monospace;
+	font-weight: 700;
+	color: #1e293b;
+	cursor: pointer;
+	transition: all 0.15s ease;
+}
+.bbcodeperms-chip-btn:hover {
+	background: #e0e7ff;
+	border-color: #818cf8;
+	color: #312e81;
+}
+
+/* Placeholders Table */
+.bbcodeperms-placeholders-wrap {
+	margin-top: 10px;
+	max-width: 650px;
+	border: 1px solid #e2e8f0;
+	border-radius: 6px;
+	overflow: hidden;
+	background: #ffffff;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+}
+.bbcodeperms-placeholders-hdr {
+	background: #f8fafc;
+	padding: 8px 12px;
+	font-size: 11px;
+	font-weight: 700;
+	color: #334155;
+	border-bottom: 1px solid #e2e8f0;
+	text-transform: uppercase;
+}
+.bbcodeperms-placeholders-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+.bbcodeperms-placeholders-table th {
+	background: #f1f5f9;
+	color: #475569;
+	font-weight: 600;
+	padding: 7px 10px;
+	text-align: left;
+	border-bottom: 1px solid #cbd5e1;
+	font-size: 11px;
+}
+[dir="rtl"] .bbcodeperms-placeholders-table th {
+	text-align: right;
+}
+.bbcodeperms-placeholders-table td {
+	padding: 7px 10px;
+	border-bottom: 1px solid #f1f5f9;
+	vertical-align: middle;
+}
+.bbcodeperms-placeholders-table tr:last-child td {
+	border-bottom: none;
+}
+.bbcodeperms-placeholders-table tr:hover td {
+	background: #f8fafc;
+}
+.bbcodeperms-tag-clickable {
+	display: inline-block;
+	font-family: monospace;
+	font-weight: 700;
+	font-size: 11px;
+	background: #eef2ff;
+	color: #4338ca;
+	border: 1px solid #c7d2fe;
+	padding: 2px 7px;
+	border-radius: 4px;
+	cursor: pointer;
+	user-select: none;
+	transition: all 0.15s ease;
+}
+.bbcodeperms-tag-clickable:hover {
+	background: #e0e7ff;
+	border-color: #6366f1;
+	color: #1e1b4b;
+}
+.bbcodeperms-example-val {
+	font-family: monospace;
+	font-size: 11px;
+	color: #047857;
+	background: #ecfdf5;
+	padding: 2px 6px;
+	border-radius: 3px;
+	border: 1px solid #a7f3d0;
+}
+.bbcodeperms-insert-btn {
+	padding: 2px 8px !important;
+	font-size: 11px !important;
+	cursor: pointer;
+}
+
+/* Alert Box Styling for Live Preview */
+.bbcodeperms-alert {
+	display: flex;
+	align-items: center;
+	background: #fff8e6;
+	background: linear-gradient(135deg, rgba(254, 243, 199, 0.7) 0%, rgba(253, 230, 138, 0.4) 100%);
+	border: 1px solid #f59e0b;
+	border-left: 4px solid #d97706;
+	border-radius: 8px;
+	padding: 14px 18px;
+	margin: 10px 0;
+	box-shadow: 0 2px 6px rgba(217, 119, 6, 0.08);
+	gap: 16px;
+	box-sizing: border-box;
+	text-align: left;
+}
+[dir="rtl"] .bbcodeperms-alert {
+	border-left: 1px solid #f59e0b;
+	border-right: 4px solid #d97706;
+	text-align: right;
+}
+.bbcodeperms-icon {
+	flex-shrink: 0;
+	width: 44px;
+	height: 44px;
+	background: #fef3c7;
+	border: 1px solid #fcd34d;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #d97706;
+	font-size: 20px;
+}
+.bbcodeperms-content {
+	flex-grow: 1;
+}
+.bbcodeperms-title {
+	display: block;
+	font-size: 14px;
+	font-weight: 700;
+	color: #92400e;
+	margin-bottom: 4px;
+}
+.bbcodeperms-desc {
+	margin: 0 0 8px 0;
+	font-size: 13px;
+	line-height: 1.5;
+	color: #78350f;
+}
+.bbcodeperms-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 6px;
+}
+.bbcodeperms-actions .button {
+	font-size: 12px;
+	padding: 4px 12px;
+	border-radius: 5px;
+	text-decoration: none;
+	display: inline-block;
+	background: #ffffff;
+	color: #333333;
+	border: 1px solid #cccccc;
+}
+</style>
+
+<a id="maincontent"></a>
+
+<h1>{L_ACP_BBCODEPERMS_SETTINGS}</h1>
+<p>{L_ACP_BBCODEPERMS_SETTINGS_EXPLAIN}</p>
+
+<form id="acp_bbcodeperms" method="post" action="{U_ACTION}">
+
+<fieldset>
+	<legend>{L_ACP_BBCODEPERMS_GENERAL_CONFIG}</legend>
+	<dl>
+		<dt><label for="bbcodeperms_enabled">{L_ACP_BBCODEPERMS_ENABLE}:</label><br /><span>{L_ACP_BBCODEPERMS_ENABLE_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="bbcodeperms_enabled" value="1"<!-- IF BBCODEPERMS_ENABLED --> id="bbcodeperms_enabled" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="bbcodeperms_enabled" value="0"<!-- IF not BBCODEPERMS_ENABLED --> id="bbcodeperms_enabled" checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="bbcodeperms_exempt_admins">{L_ACP_BBCODEPERMS_EXEMPT_ADMINS}:</label><br /><span>{L_ACP_BBCODEPERMS_EXEMPT_ADMINS_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="bbcodeperms_exempt_admins" value="1"<!-- IF BBCODEPERMS_EXEMPT_ADMINS --> id="bbcodeperms_exempt_admins" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+			<label><input type="radio" class="radio" name="bbcodeperms_exempt_admins" value="0"<!-- IF not BBCODEPERMS_EXEMPT_ADMINS --> id="bbcodeperms_exempt_admins" checked="checked"<!-- ENDIF --> /> {L_NO}</label>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label for="bbcodeperms_check_type">{L_ACP_BBCODEPERMS_CHECK_TYPE}:</label><br /><span>{L_ACP_BBCODEPERMS_CHECK_TYPE_EXPLAIN}</span></dt>
+		<dd>
+			<label><input type="radio" class="radio" name="bbcodeperms_check_type" value="any"<!-- IF BBCODEPERMS_CHECK_TYPE eq 'any' --> id="bbcodeperms_check_type" checked="checked"<!-- ENDIF --> /> {L_ACP_BBCODEPERMS_CHECK_TYPE_ANY}</label><br />
+			<label><input type="radio" class="radio" name="bbcodeperms_check_type" value="primary"<!-- IF BBCODEPERMS_CHECK_TYPE eq 'primary' --> checked="checked"<!-- ENDIF --> /> {L_ACP_BBCODEPERMS_CHECK_TYPE_PRIMARY}</label>
+		</dd>
+	</dl>
+</fieldset>
+
+<fieldset>
+	<legend>{L_ACP_BBCODEPERMS_SELECT_BBCODES}</legend>
+	<p>{L_ACP_BBCODEPERMS_SELECT_BBCODES_EXPLAIN}</p>
+
+	<dl>
+		<dt><label>{L_ACP_BBCODEPERMS_SELECT_BBCODES}:</label><br />
+			<span>{L_ACP_BBCODEPERMS_SELECT_BBCODES_EXPLAIN}</span>
+		</dt>
+		<dd>
+			<div class="bbcodeperms-panel">
+				<div class="bbcodeperms-toolbar">
+					<input type="text" id="bbcode_search_input" class="bbcodeperms-search" placeholder="{L_ACP_BBCODEPERMS_FILTER_PLACEHOLDER}" oninput="window.filterChecklist('bbcode_scrollbox', this.value);" autocomplete="off" />
+					<button type="button" class="button2" onclick="window.toggleChecklist('bbcode_scrollbox', true);">{L_ACP_BBCODEPERMS_SELECT_ALL}</button>
+					<button type="button" class="button2" onclick="window.toggleChecklist('bbcode_scrollbox', false);">{L_ACP_BBCODEPERMS_DESELECT_ALL}</button>
+					<span id="bbcode_count_badge" class="bbcodeperms-badge" data-format="{L_ACP_BBCODEPERMS_SELECTED_COUNT}">{BBCODE_SELECTED_STR}</span>
+				</div>
+
+				<div id="bbcode_scrollbox" class="bbcodeperms-scrollbox">
+					<div class="bbcodeperms-section-hdr">{L_ACP_BBCODEPERMS_CORE_BBCODES}</div>
+					<!-- BEGIN core_bbcodes -->
+					<label class="bbcodeperms-row">
+						<input type="checkbox" name="bbcodeperms_tags[]" value="{core_bbcodes.TAG}" <!-- IF core_bbcodes.CHECKED -->checked="checked"<!-- ENDIF --> onchange="window.updateCounts();" />
+						<span class="bbcodeperms-tag-badge">{core_bbcodes.NAME}</span>
+						<span class="bbcodeperms-row-desc">{core_bbcodes.DESC}</span>
+					</label>
+					<!-- END core_bbcodes -->
+
+					<!-- IF S_HAS_CUSTOM_BBCODES -->
+					<div class="bbcodeperms-section-hdr">{L_ACP_BBCODEPERMS_CUSTOM_BBCODES}</div>
+					<!-- BEGIN custom_bbcodes -->
+					<label class="bbcodeperms-row">
+						<input type="checkbox" name="bbcodeperms_tags[]" value="{custom_bbcodes.TAG}" <!-- IF custom_bbcodes.CHECKED -->checked="checked"<!-- ENDIF --> onchange="window.updateCounts();" />
+						<span class="bbcodeperms-tag-badge">{custom_bbcodes.NAME}</span>
+						<!-- IF custom_bbcodes.HELPLINE --><span class="bbcodeperms-row-desc">{custom_bbcodes.HELPLINE}</span><!-- ENDIF -->
+					</label>
+					<!-- END custom_bbcodes -->
+					<!-- ENDIF -->
+				</div>
+			</div>
+		</dd>
+	</dl>
+
+	<dl>
+		<dt><label for="bbcodeperms_custom_tags">{L_ACP_BBCODEPERMS_EXTRA_TAGS}:</label><br /><span>{L_ACP_BBCODEPERMS_EXTRA_TAGS_EXPLAIN}</span></dt>
+		<dd><input type="text" id="bbcodeperms_custom_tags" name="bbcodeperms_custom_tags" value="{BBCODEPERMS_CUSTOM_TAGS}" style="width: 100%; max-width: 650px;" placeholder="spoiler, video, download" /></dd>
+	</dl>
+</fieldset>
+
+<fieldset>
+	<legend>{L_ACP_BBCODEPERMS_SELECT_GROUPS}</legend>
+	<p>{L_ACP_BBCODEPERMS_SELECT_GROUPS_EXPLAIN}</p>
+
+	<dl>
+		<dt><label>{L_ACP_BBCODEPERMS_SELECT_GROUPS}:</label><br />
+			<span>{L_ACP_BBCODEPERMS_SELECT_GROUPS_EXPLAIN}</span>
+		</dt>
+		<dd>
+			<div class="bbcodeperms-panel">
+				<div class="bbcodeperms-toolbar">
+					<input type="text" id="group_search_input" class="bbcodeperms-search" placeholder="{L_ACP_BBCODEPERMS_FILTER_PLACEHOLDER}" oninput="window.filterChecklist('group_scrollbox', this.value);" autocomplete="off" />
+					<button type="button" class="button2" onclick="window.toggleChecklist('group_scrollbox', true);">{L_ACP_BBCODEPERMS_SELECT_ALL}</button>
+					<button type="button" class="button2" onclick="window.toggleChecklist('group_scrollbox', false);">{L_ACP_BBCODEPERMS_DESELECT_ALL}</button>
+					<span id="group_count_badge" class="bbcodeperms-badge" data-format="{L_ACP_BBCODEPERMS_SELECTED_COUNT}">{GROUP_SELECTED_STR}</span>
+				</div>
+
+				<div id="group_scrollbox" class="bbcodeperms-scrollbox">
+					<div class="bbcodeperms-section-hdr">{L_ACP_BBCODEPERMS_SYSTEM_GROUPS}</div>
+					<!-- BEGIN user_groups -->
+					<!-- IF user_groups.IS_SPECIAL -->
+					<label class="bbcodeperms-row">
+						<input type="checkbox" name="bbcodeperms_groups[]" value="{user_groups.ID}" <!-- IF user_groups.CHECKED -->checked="checked"<!-- ENDIF --> onchange="window.updateCounts();" />
+						<strong style="<!-- IF user_groups.COLOUR -->color: {user_groups.COLOUR};<!-- ENDIF -->">{user_groups.NAME}</strong>
+						<span class="bbcodeperms-sys-badge">{L_ACP_BBCODEPERMS_SYSTEM_GROUP}</span>
+					</label>
+					<!-- ENDIF -->
+					<!-- END user_groups -->
+
+					<div class="bbcodeperms-section-hdr">{L_ACP_BBCODEPERMS_CUSTOM_GROUPS}</div>
+					<!-- BEGIN user_groups -->
+					<!-- IF not user_groups.IS_SPECIAL -->
+					<label class="bbcodeperms-row">
+						<input type="checkbox" name="bbcodeperms_groups[]" value="{user_groups.ID}" <!-- IF user_groups.CHECKED -->checked="checked"<!-- ENDIF --> onchange="window.updateCounts();" />
+						<strong style="<!-- IF user_groups.COLOUR -->color: {user_groups.COLOUR};<!-- ENDIF -->">{user_groups.NAME}</strong>
+					</label>
+					<!-- ENDIF -->
+					<!-- END user_groups -->
+				</div>
+			</div>
+		</dd>
+	</dl>
+</fieldset>
+
+<fieldset>
+	<legend>{L_ACP_BBCODEPERMS_MESSAGE_CONFIG}</legend>
+	<p>{L_ACP_BBCODEPERMS_MESSAGE_CONFIG_EXPLAIN}</p>
+
+	<dl>
+		<dt><label for="bbcodeperms_message">{L_ACP_BBCODEPERMS_MESSAGE}:</label><br />
+			<span>{L_ACP_BBCODEPERMS_PLACEHOLDERS_EXPLAIN}</span>
+		</dt>
+		<dd>
+			<div class="bbcodeperms-quick-bar">
+				<span class="bbcodeperms-quick-title">{L_ACP_BBCODEPERMS_QUICK_INSERT}:</span>
+				<!-- BEGIN placeholders -->
+				<button type="button" class="bbcodeperms-chip-btn" data-tag="{placeholders.TAG}" onclick="window.insertPlaceholder(this.getAttribute('data-tag'));" title="{placeholders.DESC}">+ {placeholders.TAG}</button>
+				<!-- END placeholders -->
+			</div>
+
+			<textarea id="bbcodeperms_message" name="bbcodeperms_message" rows="8" cols="60" style="width: 100%; max-width: 650px; font-family: monospace; font-size: 12px; direction: ltr; text-align: left; box-sizing: border-box; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px;">{BBCODEPERMS_MESSAGE}</textarea>
+
+			<div class="bbcodeperms-placeholders-wrap">
+				<div class="bbcodeperms-placeholders-hdr">{L_ACP_BBCODEPERMS_PLACEHOLDERS}</div>
+				<table class="bbcodeperms-placeholders-table">
+					<thead>
+						<tr>
+							<th style="width: 140px;">{L_ACP_BBCODEPERMS_PLACEHOLDER_TAG}</th>
+							<th>{L_ACP_BBCODEPERMS_PLACEHOLDER_DESC}</th>
+							<th style="width: 150px;">{L_ACP_BBCODEPERMS_PLACEHOLDER_EXAMPLE}</th>
+							<th style="width: 80px; text-align: center;">{L_ACP_BBCODEPERMS_PLACEHOLDER_ACTION}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- BEGIN placeholders -->
+						<tr>
+							<td>
+								<span class="bbcodeperms-tag-clickable" data-tag="{placeholders.TAG}" onclick="window.insertPlaceholder(this.getAttribute('data-tag'));" title="{L_ACP_BBCODEPERMS_CLICK_TO_INSERT}">{placeholders.TAG}</span>
+							</td>
+							<td style="color: #475569;">
+								{placeholders.DESC}
+							</td>
+							<td>
+								<span class="bbcodeperms-example-val">{placeholders.EXAMPLE}</span>
+							</td>
+							<td style="text-align: center;">
+								<button type="button" class="button2 bbcodeperms-insert-btn" data-tag="{placeholders.TAG}" onclick="window.insertPlaceholder(this.getAttribute('data-tag'));" title="{L_ACP_BBCODEPERMS_CLICK_TO_INSERT}">+ {L_ACP_BBCODEPERMS_INSERT}</button>
+							</td>
+						</tr>
+						<!-- END placeholders -->
+					</tbody>
+				</table>
+			</div>
+		</dd>
+	</dl>
+
+	<div style="margin-top: 15px; padding: 15px; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px; max-width: 650px;">
+		<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+			<strong style="font-size: 13px; color: #334155;">{L_ACP_BBCODEPERMS_LIVE_PREVIEW}:</strong>
+			<button type="button" class="button2" onclick="window.updateLivePreview();">&#x21bb; Refresh</button>
+		</div>
+		<div id="bbcodeperms_preview_container" style="background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0; min-height: 50px;">
+			<div id="bbcodeperms_preview_inner">{{ BBCODEPERMS_PREVIEW_HTML|raw }}</div>
+		</div>
+	</div>
+</fieldset>
+
+<fieldset class="submit-buttons">
+	<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+	<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+	{S_FORM_TOKEN}
+</fieldset>
+
+</form>
+
+<script>
+// <![CDATA[
+function replaceTplVar(str, varName, replacement) {
+	return str.split('{' + varName + '}').join(replacement);
+}
+
+// Insert placeholder tag at textarea cursor position
+window.insertPlaceholder = function(tag) {
+	var textarea = document.getElementById('bbcodeperms_message');
+	if (!textarea) return;
+
+	var startPos = textarea.selectionStart;
+	var endPos = textarea.selectionEnd;
+	var text = textarea.value;
+
+	if (typeof startPos === 'number' && typeof endPos === 'number') {
+		textarea.value = text.substring(0, startPos) + tag + text.substring(endPos);
+		textarea.selectionStart = textarea.selectionEnd = startPos + tag.length;
+	} else {
+		textarea.value += tag;
+	}
+	textarea.focus();
+	window.updateLivePreview();
+};
+
+// Select All / Deselect All for Checklist Box
+window.toggleChecklist = function(containerId, isChecked) {
+	var container = document.getElementById(containerId);
+	if (!container) return;
+
+	var checkboxes = container.querySelectorAll('input[type="checkbox"]');
+	for (var i = 0; i < checkboxes.length; i++) {
+		var row = checkboxes[i].closest('.bbcodeperms-row');
+		if (!row || row.style.display !== 'none') {
+			checkboxes[i].checked = isChecked;
+		}
+	}
+	window.updateCounts();
+};
+
+// Live Search Filter for Checklist Box
+window.filterChecklist = function(containerId, query) {
+	var container = document.getElementById(containerId);
+	if (!container) return;
+
+	query = (query || '').toLowerCase().trim();
+	var rows = container.querySelectorAll('.bbcodeperms-row');
+	for (var i = 0; i < rows.length; i++) {
+		var text = (rows[i].textContent || '').toLowerCase();
+		if (!query || text.indexOf(query) !== -1) {
+			rows[i].style.display = 'flex';
+		} else {
+			rows[i].style.display = 'none';
+		}
+	}
+};
+
+// Update selected count badges
+window.updateCounts = function() {
+	var bbBox = document.getElementById('bbcode_scrollbox');
+	var bbBadge = document.getElementById('bbcode_count_badge');
+	if (bbBox && bbBadge) {
+		var bbCount = bbBox.querySelectorAll('input[type="checkbox"]:checked').length;
+		var bbPattern = bbBadge.getAttribute('data-format') || '%d selected';
+		bbBadge.textContent = bbPattern.replace('%d', bbCount);
+	}
+
+	var grpBox = document.getElementById('group_scrollbox');
+	var grpBadge = document.getElementById('group_count_badge');
+	if (grpBox && grpBadge) {
+		var grpCount = grpBox.querySelectorAll('input[type="checkbox"]:checked').length;
+		var grpPattern = grpBadge.getAttribute('data-format') || '%d selected';
+		grpBadge.textContent = grpPattern.replace('%d', grpCount);
+	}
+};
+
+// Live Message Preview Updater
+window.updateLivePreview = function() {
+	var textarea = document.getElementById('bbcodeperms_message');
+	var target = document.getElementById('bbcodeperms_preview_inner');
+	if (!textarea || !target) return;
+
+	var text = textarea.value;
+	if (!text || text.trim() === '') {
+		target.innerHTML = '<em style="color: #94a3b8;">No message specified yet.</em>';
+		return;
+	}
+
+	var sitename = '{BBCODEPERMS_PREVIEW_SITENAME}' || 'Forum Community';
+
+	text = replaceTplVar(text, 'LOGIN_URL', '#login');
+	text = replaceTplVar(text, 'REGISTER_URL', '#register');
+	text = replaceTplVar(text, 'USERNAME', 'JohnDoe');
+	text = replaceTplVar(text, 'SITENAME', sitename);
+	text = replaceTplVar(text, 'TAG', 'code');
+
+	target.innerHTML = text;
+};
+
+// Attach listeners safely
+(function() {
+	var textarea = document.getElementById('bbcodeperms_message');
+	if (textarea) {
+		textarea.addEventListener('input', window.updateLivePreview);
+		textarea.addEventListener('keyup', window.updateLivePreview);
+		textarea.addEventListener('change', window.updateLivePreview);
+	}
+
+	var form = document.getElementById('acp_bbcodeperms');
+	if (form) {
+		form.addEventListener('reset', function() {
+			setTimeout(function() {
+				window.updateCounts();
+				window.updateLivePreview();
+			}, 30);
+		});
+	}
+
+	var bbBox = document.getElementById('bbcode_scrollbox');
+	if (bbBox) {
+		bbBox.addEventListener('change', function(e) {
+			if (e.target && e.target.type === 'checkbox') {
+				window.updateCounts();
+			}
+		});
+	}
+
+	var grpBox = document.getElementById('group_scrollbox');
+	if (grpBox) {
+		grpBox.addEventListener('change', function(e) {
+			if (e.target && e.target.type === 'checkbox') {
+				window.updateCounts();
+			}
+		});
+	}
+
+	window.updateCounts();
+	window.updateLivePreview();
+})();
+// ]]>
+</script>
+
+<!-- INCLUDE overall_footer.html -->

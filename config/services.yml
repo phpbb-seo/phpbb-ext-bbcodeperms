@@ -1,0 +1,13 @@
+services:
+    phpbbseo.bbcodeperms.listener:
+        class: phpbbseo\bbcodeperms\event\main_listener
+        arguments:
+            - '@config'
+            - '@config_text'
+            - '@user'
+            - '@auth'
+            - '@dbal.conn'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+        tags:
+            - { name: event.listener }

@@ -1,0 +1,113 @@
+/**
+ * phpBB-SEO BBCode Permissions CSS
+ * Responsive, RTL-friendly & theme-compatible styling
+ */
+
+.bbcodeperms-alert {
+	display: flex;
+	align-items: center;
+	background: #fff8e6;
+	background: linear-gradient(135deg, rgba(254, 243, 199, 0.7) 0%, rgba(253, 230, 138, 0.4) 100%);
+	border: 1px solid #f59e0b;
+	border-inline-start: 4px solid #d97706;
+	border-radius: 8px;
+	padding: 14px 18px;
+	margin: 12px 0;
+	box-shadow: 0 2px 6px rgba(217, 119, 6, 0.08);
+	gap: 16px;
+	box-sizing: border-box;
+}
+
+.bbcodeperms-icon {
+	flex-shrink: 0;
+	width: 44px;
+	height: 44px;
+	background: #fef3c7;
+	border: 1px solid #fcd34d;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #d97706;
+	font-size: 20px;
+}
+
+.bbcodeperms-content {
+	flex-grow: 1;
+}
+
+.bbcodeperms-title {
+	display: block;
+	font-size: 14px;
+	font-weight: 700;
+	color: #92400e;
+	margin-bottom: 4px;
+}
+
+.bbcodeperms-desc {
+	margin: 0 0 8px 0;
+	font-size: 13px;
+	line-height: 1.5;
+	color: #78350f;
+}
+
+.bbcodeperms-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 6px;
+}
+
+.bbcodeperms-actions .button {
+	font-size: 12px;
+	padding: 4px 12px;
+	border-radius: 5px;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+}
+
+/* Dark mode compatibility (Zeina Theme dark mode & Prosilver dark) */
+body.dark-theme .bbcodeperms-alert,
+.dark .bbcodeperms-alert,
+[data-theme="dark"] .bbcodeperms-alert {
+	background: #23221b;
+	background: linear-gradient(135deg, #2b281f 0%, #1c1b16 100%);
+	border-color: #78350f;
+	border-inline-start-color: #f59e0b;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .bbcodeperms-icon,
+.dark .bbcodeperms-icon,
+[data-theme="dark"] .bbcodeperms-icon {
+	background: #39301e;
+	border-color: #5c451b;
+	color: #fbbf24;
+}
+
+body.dark-theme .bbcodeperms-title,
+.dark .bbcodeperms-title,
+[data-theme="dark"] .bbcodeperms-title {
+	color: #fde68a;
+}
+
+body.dark-theme .bbcodeperms-desc,
+.dark .bbcodeperms-desc,
+[data-theme="dark"] .bbcodeperms-desc {
+	color: #d1d5db;
+}
+
+@media (max-width: 600px) {
+	.bbcodeperms-alert {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+		padding: 12px;
+	}
+	.bbcodeperms-icon {
+		width: 36px;
+		height: 36px;
+		font-size: 16px;
+	}
+}

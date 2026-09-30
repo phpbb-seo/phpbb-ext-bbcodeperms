@@ -1,0 +1,23 @@
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE & Editor files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Archives & Builds
+*.zip
+*.tar.gz
+*.rar
+
+# Composer
+/vendor/
+composer.lock
+
+# Test artifacts
+test_*.php
+check_*.php
+make_zip.php
